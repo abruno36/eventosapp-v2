@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EventosApp</title>
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet"
+	href="/materialize/css/materialize.min.css" media="screen,projection" />
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/css/bootstrap.css" />
+<link rel="stylesheet" href="/style/style.css" />
+</head>
+<body style="padding-top: 80px;">
+
+	<header style="width: 100%; position: fixed; top: 0;">
+
+		<nav>
+			<div class="nav-wrapper">
+				<a href="/" class="brand-logo">SISTEMA DE EVENTOS</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a href="/">HOME<i class="material-icons left">home</i></a></li>
+					<li><a href="/cadastrarEvento">CADASTRAR EVENTOS<i
+							class="material-icons left">add_circle_outline</i></a></li>
+				</ul>
+			</div>
+		</nav>
+
+
+	</header>
+	<div class="titulo">LISTA DE EVENTOS</div>
+
+	<table class="container">
+		<thead>
+			<tr>
+				<th class="header"><a th:href="@{'/page/' + ${currentPage} + '?sortField=nome&sortDir=' + ${reverseSortDir}}">NOME</a></th>
+				<th class="header"><a th:href="@{'/page/' + ${currentPage} + '?sortField=local&sortDir=' + ${reverseSortDir}}">LOCAL</a></th>
+				<th class="header"><a th:href="@{'/page/' + ${currentPage} + '?sortField=data&sortDir=' + ${reverseSortDir}}">DATA</a></th>
+				<th class="header"><a th:href="@{'/page/' + ${currentPage} + '?sortField=horario&sortDir=' + ${reverseSortDir}}">HORARIO</a></th>
+				<th class="header">DELETAR</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="evento : ${eventlist}" class="border border-primary" style="cursor: default"
+				onMouseOver="javascript:this.style.backgroundColor='#E8E8E8'"
+				onMouseOut="javascript:this.style.backgroundColor=''">
+				<td><a th:href="${(#mvc.url('EC#detalhesEvento').arg(0, evento.codigo)).build()}"><span th:text="${evento.nome}"></span></a></td>
+				<td><a th:href="${(#mvc.url('EC#detalhesEvento').arg(0, evento.codigo)).build()}"><span th:text="${evento.local}"></span></a></td>
+				<td class="detail"><a th:href="${(#mvc.url('EC#detalhesEvento').arg(0, evento.codigo)).build()}"><span th:text="${evento.data}"></span></a></td>
+				<td class="detail"><a th:href="${(#mvc.url('EC#detalhesEvento').arg(0, evento.codigo)).build()}"><span th:text="${evento.horario}"></span></a></td>
+				<td class="detail"><a class="waves-effect waves-light btn-small" th:href="${(#mvc.url('EC#deletarEvento').arg(0, evento.codigo)).build()}"><i class="material-icons left">delete</i></a></td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="container">
+	
+	<p>Total Eventos: [[${totalItems}]]</p>
+		<nav aria-label="Page navigation example">
+			<ul class="pagination">
+				<li  th:if="${currentPage != 0}" class="page-item"><a class="page-link" th:href="@{'/page/'+${currentPage-1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Previous</a></li>
+				<li th:each="i:${#numbers.sequence(1, totalPages)}" th:classappend="${currentPage==i-1 ? 'active' : ''} " class="page-item">
+					<a class="page-link" th:href="@{'/page/'+${i-1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+				</li>
+				<li th:if="${currentPage+1 != totalPages}" class="page-item"><a class="page-link" th:href="@{'/page/'+${currentPage+1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a></li>
+			</ul>
+		</nav>
+	</div>
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+</body>
+<footer class="page-footer">
+	<p>By Antonio Bruno - Copy Right - APP EVENTOS 2023</p>
+</footer>
+
+</html>
+

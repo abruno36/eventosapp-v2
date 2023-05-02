@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>EventosApp</title>
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet"
+	href="/materialize/css/materialize.min.css" media="screen,projection" />
+
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/style/style.css" />
+</head>
+<body>
+
+	<header>
+		<nav class="menu">
+			<a href="/" class="brand-logo">SISTEMA DE EVENTOS</a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<li><a href="/">HOME<i class="material-icons left">home</i></a></li>
+				<li><a href="/eventos">LISTA DE EVENTOS<i
+						class="material-icons left">format_list_bulleted</i></a></li>
+			</ul>
+		</nav>
+
+	</header>
+
+
+	<div class="container formEvento">
+		<a class="titulo">CADASTRO DE EVENTOS</a>
+		<form class="container" method="post">
+			Nome: <input type="text" required name="nome" />
+			<div class="row">
+				<div class="input-field col s6">
+					Local: <input type="text" required name="local" />
+				</div>
+				<div class="input-field col s3 ">
+					Data: <input type="date" id="datePickerId" required name="data" /> 
+				</div>
+				<div class="input-field col s3">
+					Horario: <input type="time" id="appt" min="08:00" max="24:00"
+						required name="horario" />
+				</div>
+			</div>
+			<button class="waves-effect waves-light btn" type="submit">Salvar</button>
+			<div class="alert alert-danger ef9a9a red lighten-3  container"
+				style="text-align: center" role="alert" th:text="${erro}"
+				th:if="${erro}"></div>
+
+			<div class="alert alert-primary 69f0ae green accent-2 container"
+				style="text-align: center" role="alert" th:text="${sucesso}"
+				th:if="${sucesso}"></div>
+
+		</form>
+	</div>
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+</body>
+<footer class="page-footer">
+	<p>By Antonio Bruno - Copy Right - APP EVENTOS 2021</p>
+</footer>
+<script type="text/javascript">
+	datePickerId.min = new Date().toISOString().split("T")[0];
+	
+</script>
+</html>
+
+
+
+
+
